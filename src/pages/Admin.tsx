@@ -324,7 +324,7 @@ export default function Admin() {
                   </div>
                   <Dialog>
                     <DialogTrigger asChild>
-                      <Button className="bg-forest hover:bg-forest/90">
+                      <Button variant="outline">
                         <Plus className="w-4 h-4 mr-2" />
                         Add Coordinator
                       </Button>
@@ -414,7 +414,7 @@ export default function Admin() {
                   </div>
                   <Dialog>
                     <DialogTrigger asChild>
-                      <Button className="bg-forest hover:bg-forest/90">
+                      <Button variant="outline">
                         <Plus className="w-4 h-4 mr-2" />
                         Add Driver
                       </Button>
