@@ -17,7 +17,7 @@ import {
   CheckCircle, XCircle, Download, Plus, Edit, Trash2, Users, Building, GraduationCap, 
   FileText, Calendar, MapPin, Phone, Mail, User, Clock, FileCheck, AlertCircle,
   Navigation, Car, Hospital, Fuel, IndianRupee, Search, Filter, TrendingUp,
-  Package, Activity, Ticket, BarChart3, Settings
+  Package, Activity, Ticket, BarChart3, Settings, Layers
 } from "lucide-react";
 import { useToast } from "@/hooks/use-toast";
 import { 
@@ -27,6 +27,8 @@ import {
 } from "@/lib/mockData";
 import type { Event, Coordinator, BusDriver, Teacher } from "@/lib/mockData";
 import EcoCentreBookingsAdmin from "@/pages/admin/EcoCentreBookingsAdmin";
+import StageManagement from "@/pages/admin/StageManagement";
+import { useStage } from "@/hooks/useStage";
 import MapPanel from "@/components/MapPanel";
 import { format, differenceInDays, parseISO } from "date-fns";
 
@@ -37,6 +39,7 @@ export default function Admin() {
   const [selectedEvent, setSelectedEvent] = useState<Event | null>(null);
   const [isEventDetailOpen, setIsEventDetailOpen] = useState(false);
   const { toast } = useToast();
+  const { checkRoute, checkStage } = useStage();
 
   // Sync URL parameter with tab state
   useEffect(() => {
@@ -172,12 +175,26 @@ export default function Admin() {
         {/* Tabs for different sections */}
         <Tabs value={activeTab} onValueChange={handleTabChange} className="space-y-6">
           <TabsList className="bg-muted">
-            <TabsTrigger value="events"><Calendar className="w-4 h-4 mr-2" />Events</TabsTrigger>
-            <TabsTrigger value="bookings"><Ticket className="w-4 h-4 mr-2" />Eco Centre Bookings</TabsTrigger>
-            <TabsTrigger value="schools"><Users className="w-4 h-4 mr-2" />Schools</TabsTrigger>
-            <TabsTrigger value="coordinators"><User className="w-4 h-4 mr-2" />Coordinators</TabsTrigger>
-            <TabsTrigger value="drivers"><Car className="w-4 h-4 mr-2" />Drivers</TabsTrigger>
-            <TabsTrigger value="reports"><FileText className="w-4 h-4 mr-2" />Reports</TabsTrigger>
+            {/* Stage 1 tabs */}
+            {checkRoute('/admin?tab=events') && (
+              <TabsTrigger value="events"><Calendar className="w-4 h-4 mr-2" />Events</TabsTrigger>
+            )}
+            {checkRoute('/admin?tab=coordinators') && (
+              <TabsTrigger value="coordinators"><User className="w-4 h-4 mr-2" />Coordinators</TabsTrigger>
+            )}
+            {checkRoute('/admin?tab=drivers') && (
+              <TabsTrigger value="drivers"><Car className="w-4 h-4 mr-2" />Drivers</TabsTrigger>
+            )}
+            {/* Stage 2 tabs */}
+            {checkRoute('/admin?tab=bookings') && (
+              <TabsTrigger value="bookings"><Ticket className="w-4 h-4 mr-2" />Eco Centre Bookings</TabsTrigger>
+            )}
+            {/* Stage 3 tabs */}
+            {checkRoute('/admin?tab=reports') && (
+              <TabsTrigger value="reports"><FileText className="w-4 h-4 mr-2" />Reports</TabsTrigger>
+            )}
+            {/* Always available */}
+            <TabsTrigger value="stages"><Layers className="w-4 h-4 mr-2" />Stage Management</TabsTrigger>
           </TabsList>
 
           {/* Events Management */}
@@ -359,7 +376,7 @@ export default function Admin() {
                   </div>
                   <Dialog>
                     <DialogTrigger asChild>
-                      <Button className="bg-forest hover:bg-forest/90">
+                      <Button variant="outline">
                         <Plus className="w-4 h-4 mr-2" />
                         Add Coordinator
                       </Button>
@@ -449,7 +466,7 @@ export default function Admin() {
                   </div>
                   <Dialog>
                     <DialogTrigger asChild>
-                      <Button className="bg-forest hover:bg-forest/90">
+                      <Button variant="outline">
                         <Plus className="w-4 h-4 mr-2" />
                         Add Driver
                       </Button>
@@ -571,6 +588,11 @@ export default function Admin() {
                 </div>
               </CardContent>
             </Card>
+          </TabsContent>
+
+          {/* Stage Management */}
+          <TabsContent value="stages">
+            <StageManagement />
           </TabsContent>
         </Tabs>
       </main>

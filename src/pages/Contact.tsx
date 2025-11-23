@@ -53,7 +53,7 @@ const Contact = () => {
             <div className="max-w-4xl mx-auto text-center mb-12">
               <h2 className="text-3xl font-bold mb-6">Get In Touch</h2>
               <p className="text-lg text-muted-foreground leading-relaxed">
-                Reach out to us for inquiries about school registration, program details, or partnership opportunities.
+                Reach out to us for inquiries about program details, or partnership opportunities.
               </p>
             </div>
             <div className="max-w-5xl mx-auto">
@@ -136,7 +136,7 @@ const Contact = () => {
                           href="mailto:info@childedprogram.org"
                           className="text-primary hover:underline"
                         >
-                          info@childedprogram.org
+                          info@foresteco.org
                         </a>
                       </div>
                     </div>

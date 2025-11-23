@@ -20,6 +20,7 @@ The Child Education Program (CEP) is a comprehensive web-based platform designed
 10. [Booking System Features](#booking-system-features)
 11. [Data Models & Interfaces](#data-models--interfaces)
 12. [Implementation Phases](#implementation-phases)
+13. [Stage Management System](#stage-management-system)
 
 ---
 
@@ -1207,6 +1208,210 @@ interface Event {
 - Multi-language support
 - Mobile app development
 - Advanced analytics
+
+---
+
+## Stage Management System
+
+### Overview
+
+The CEP platform implements a **3-stage rollout system** that allows administrators to control which features and screens are available on the portal. This enables gradual feature deployment, testing, and user adoption.
+
+### Stage Configuration
+
+The platform is divided into **3 stages**, each containing specific screens, features, and routes:
+
+#### **Stage 1: Foundation** (Always Enabled)
+**Status**: ✅ Always Active (Cannot be disabled)
+
+**Description**: Basic public-facing website and core booking functionality
+
+**Screens (20)**:
+1. Home
+2. About
+3. Eco-Centres Listing
+4. Eco-Centre Detail
+5. School Registration
+6. Thank You
+7. Contact
+8. Gallery
+9. Guest Lecturers
+10. Execution Plan
+11. Bookings Listing
+12. Activity Details
+13. Booking Form (Single Activity)
+14. Booking Confirmation
+15. Admin Dashboard
+16. Events Management
+17. Schools Management
+18. Coordinators Management
+19. Drivers Management
+20. Basic Reports
+
+**Features**:
+- Public website pages
+- Eco-centre browsing and details
+- School registration
+- Basic single-activity booking
+- Basic admin event management
+- School, coordinator, and driver management
+- Basic reporting
+
+**Routes**:
+- `/`
+- `/about`
+- `/eco-centres`
+- `/eco-centres/:id`
+- `/school/register`
+- `/school/thank-you`
+- `/contact`
+- `/gallery`
+- `/lecturers`
+- `/execution-plan`
+- `/bookings`
+- `/bookings/:id`
+- `/bookings/:ecoCentreId/:activityId`
+- `/bookings/confirmation/:bookingId`
+- `/admin`
+
+---
+
+#### **Stage 2: Advanced Booking** (Optional)
+**Status**: ⚙️ Configurable (Can be enabled/disabled)
+
+**Description**: Multi-activity bookings, full-day packages, and enhanced booking features
+
+**Screens (11)**:
+1. Multi-Activity Selection
+2. Full-Day Package Booking
+3. Time Slot Selection
+4. Multi-Slot Booking
+5. Enhanced Booking Form
+6. Eco Centre Bookings Admin
+7. Bookings Dashboard
+8. All Bookings List
+9. Eco Centres Management (Admin)
+10. Activities Management (Admin)
+11. Booking Reports
+
+**Features**:
+- Multi-activity booking selection
+- Full-day package bookings
+- Time slot management
+- Multi-slot booking support
+- Eco centre bookings admin module
+- Activity and slot management
+- Advanced booking reports
+
+**Routes**:
+- `/bookings/:id` (Enhanced with multi-activity)
+- `/bookings/:ecoCentreId/:activityId` (Enhanced with full-day packages)
+- `/admin?tab=bookings`
+
+**Dependencies**: Requires Stage 1 (Foundation)
+
+---
+
+#### **Stage 3: Advanced Admin** (Optional)
+**Status**: ⚙️ Configurable (Can be enabled/disabled)
+
+**Description**: Complete admin features, advanced analytics, and comprehensive management
+
+**Screens (10)**:
+1. Advanced Reports Dashboard
+2. Revenue Analytics
+3. Booking Analytics
+4. Eco Centre Analytics
+5. Activity Performance Reports
+6. Financial Reports
+7. Advanced Filters and Search
+8. Bulk Operations
+9. Export Functionality
+10. Advanced Settings
+
+**Features**:
+- Advanced analytics and reporting
+- Revenue tracking and forecasting
+- Performance metrics
+- Bulk operations
+- Advanced export options
+- Comprehensive filtering
+- System settings management
+
+**Routes**:
+- `/admin?tab=reports` (Enhanced reports)
+- `/admin?tab=bookings` (Enhanced with advanced features)
+
+**Dependencies**: Requires Stage 2 (Advanced Booking)
+
+---
+
+### Stage Management Admin Screen
+
+**Location**: `/admin?tab=stages`
+
+**Features**:
+- View all 3 stages with their status (Enabled/Disabled)
+- Enable/disable Stage 2 and Stage 3
+- View detailed breakdown of screens, features, and routes for each stage
+- See stage dependencies and warnings
+- Real-time configuration updates
+- Summary statistics (Total stages, Enabled, Disabled)
+
+**Access Control**:
+- Only administrators can access stage management
+- Stage 1 cannot be disabled (always enabled)
+- Stage 3 requires Stage 2 to be enabled
+
+---
+
+### How Stage Management Works
+
+1. **Route Protection**: All routes are protected by `StageRouteGuard` component that checks if the route is enabled in any active stage
+2. **Navigation Filtering**: Navigation links in `Navbar` automatically show/hide based on enabled stages
+3. **Feature Flags**: Components can check stage availability using the `useStage` hook
+4. **Configuration Storage**: Stage configuration is stored in `localStorage` for persistence
+5. **Real-time Updates**: Changes to stage configuration take effect immediately across the application
+
+---
+
+### Stage Breakdown Summary
+
+| Stage | Screens | Features | Routes | Status |
+|-------|---------|----------|--------|--------|
+| **Stage 1: Foundation** | 20 | 7 | 15 | Always Enabled |
+| **Stage 2: Advanced Booking** | 11 | 7 | 3 | Configurable |
+| **Stage 3: Advanced Admin** | 10 | 7 | 2 | Configurable |
+| **Total** | **41** | **21** | **20** | - |
+
+---
+
+### Use Cases for Stage Management
+
+1. **Gradual Rollout**: Enable features progressively as users become familiar with the system
+2. **A/B Testing**: Test new features with a subset of users before full deployment
+3. **Maintenance Mode**: Temporarily disable non-essential features during maintenance
+4. **Feature Gating**: Control access to premium or advanced features
+5. **Regional Deployment**: Enable different feature sets for different regions or user groups
+
+---
+
+### Technical Implementation
+
+**Files**:
+- `src/lib/stageConfig.ts` - Stage configuration and management functions
+- `src/hooks/useStage.ts` - React hook for stage checking
+- `src/components/StageRouteGuard.tsx` - Route protection component
+- `src/pages/admin/StageManagement.tsx` - Admin UI for stage management
+
+**Key Functions**:
+- `getStageConfig()` - Get current stage configuration
+- `updateStageEnabled()` - Enable/disable a stage
+- `isRouteEnabled()` - Check if a route is available
+- `isFeatureEnabled()` - Check if a feature is available
+- `useStage()` - React hook for stage management
+
+---
 - Feedback & reviews system
 
 ---

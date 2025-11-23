@@ -116,9 +116,9 @@ const SchoolRegister = () => {
         <section className="py-20 bg-gradient-forest text-primary-foreground">
           <div className="container mx-auto px-4">
             <div className="max-w-3xl mx-auto text-center animate-fade-in">
-              <h1 className="text-4xl md:text-5xl font-bold mb-6">School Registration</h1>
+              <h1 className="text-4xl md:text-5xl font-bold mb-6">Send Enquiry</h1>
               <p className="text-xl opacity-95">
-                Register your school to participate in our eco-centre education program
+                Send an enquiry to participate in our eco-centre program
               </p>
             </div>
           </div>
@@ -128,54 +128,54 @@ const SchoolRegister = () => {
         <section className="py-16 bg-background">
           <div className="container mx-auto px-4">
             <div className="max-w-4xl mx-auto text-center mb-12">
-              <h2 className="text-3xl font-bold mb-6">Registration Form</h2>
+              <h2 className="text-3xl font-bold mb-6">Enquiry Form</h2>
               <p className="text-lg text-muted-foreground leading-relaxed">
-                Complete the form below to register your school for the Child Education Program. Our team will review your application and get back to you soon.
+                Complete the form below to send an enquiry to participate in our eco-centre program. Our team will review your application and get back to you soon.
               </p>
             </div>
             <div className="max-w-3xl mx-auto">
 
             <Card className="shadow-soft">
               <CardHeader>
-                <h3 className="text-2xl font-semibold">Registration Details</h3>
+                <h3 className="text-2xl font-semibold">Enquiry Details</h3>
                 <p className="text-sm text-muted-foreground">All fields marked with * are required</p>
               </CardHeader>
               <CardContent>
                 <form onSubmit={handleSubmit} className="space-y-6">
                   {/* School Information */}
                   <div className="space-y-4">
-                    <h3 className="text-lg font-semibold">School Information</h3>
+                    <h3 className="text-lg font-semibold">Enquiry Information</h3>
                     
                     <div>
-                      <Label htmlFor="schoolName">School Name *</Label>
+                      <Label htmlFor="schoolName">Enquiry Name *</Label>
                       <Input
                         id="schoolName"
                         value={formData.schoolName}
                         onChange={(e) => setFormData({ ...formData, schoolName: e.target.value })}
-                        placeholder="Enter school name"
+                        placeholder="Enter enquiry name"
                         required
                       />
                     </div>
 
                     <div className="grid md:grid-cols-2 gap-4">
                       <div>
-                        <Label htmlFor="contactPerson">Principal/Contact Person *</Label>
+                        <Label htmlFor="contactPerson">Contact Person *</Label>
                         <Input
                           id="contactPerson"
                           value={formData.contactPerson}
                           onChange={(e) => setFormData({ ...formData, contactPerson: e.target.value })}
-                          placeholder="Full name"
+                          placeholder="Enter contact person name"
                           required
                         />
                       </div>
                       <div>
-                        <Label htmlFor="contactPhone">Contact Number *</Label>
+                        <Label htmlFor="contactPhone">Contact Phone Number *</Label>
                         <Input
                           id="contactPhone"
                           type="tel"
                           value={formData.contactPhone}
                           onChange={(e) => setFormData({ ...formData, contactPhone: e.target.value })}
-                          placeholder="+91-XXXXXXXXXX"
+                          placeholder="+91-xxxxxxxxxx"
                           required
                         />
                       </div>
@@ -188,19 +188,19 @@ const SchoolRegister = () => {
                         type="email"
                         value={formData.email}
                         onChange={(e) => setFormData({ ...formData, email: e.target.value })}
-                        placeholder="school@example.com"
+                        placeholder="your@email.com"
                         required
                       />
                     </div>
 
                     <div>
-                      <Label htmlFor="studentCount">Number of Students *</Label>
+                      <Label htmlFor="studentCount">Number of Participants *</Label>
                       <Input
                         id="studentCount"
                         type="number"
                         value={formData.studentCount}
                         onChange={(e) => setFormData({ ...formData, studentCount: e.target.value })}
-                        placeholder="Enter number of students"
+                        placeholder="Enter number of participants"
                         min="1"
                         required
                       />
@@ -446,7 +446,7 @@ const SchoolRegister = () => {
                   )}
 
                   {/* Documents */}
-                  <div className="space-y-4">
+                  {/*<div className="space-y-4">
                     <h3 className="text-lg font-semibold">Required Documents</h3>
                     
                     <div>
@@ -477,12 +477,12 @@ const SchoolRegister = () => {
                         </label>
                       </div>
                     </div>
-                  </div>
+                  </div>*/}
 
                   {/* Submit */}
                   <div className="flex gap-4">
                     <Button type="submit" variant="forest" className="flex-1">
-                      Submit Registration
+                      Submit Enquiry
                     </Button>
                     <Button type="button" variant="outline" onClick={() => navigate('/eco-centres')}>
                       Cancel

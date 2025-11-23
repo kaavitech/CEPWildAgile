@@ -7,21 +7,13 @@ const Footer = () => {
   return (
     <footer className="bg-card border-t border-border mt-20">
       <div className="container mx-auto px-4 py-12">
-        <div className="grid grid-cols-1 md:grid-cols-5 gap-6">
+        <div className="grid grid-cols-1 md:grid-cols-4 gap-6">
           {/* About */}
           <div>
             <img src={mahaForestLogo} alt="Maharashtra Forest Department" className="h-16 w-16 object-contain" />
             <h3 className="font-bold text-lg text-primary">Maharashtra <br/>Forest Department</h3>
             <p className="text-sm text-muted-foreground">
               Goverment of Maharashtra
-            </p>
-          </div>
-
-          <div >
-            <img src={logo} alt="WildAgile Foundation" className="h-16 w-16 object-contain" />
-            <h3 className="font-bold text-lg text-primary">WildAgile Foundation</h3>
-            <p className="text-sm text-muted-foreground">
-              Building Environment Conscious Generation through forest education programs.
             </p>
           </div>
 
@@ -44,11 +36,11 @@ const Footer = () => {
                   Gallery
                 </Link>
               </li>
-              <li>
+              {/*<li>
                 <Link to="/register" className="text-sm text-muted-foreground hover:text-primary transition-colors">
                   Register School
                 </Link>
-              </li>
+              </li>*/}
             </ul>
           </div>
 
@@ -69,7 +61,7 @@ const Footer = () => {
             <ul className="space-y-3">
               <li className="flex items-start gap-2 text-sm text-muted-foreground">
                 <Mail size={16} className="mt-1 text-primary" />
-                <span>info@wildagile.org</span>
+                <span>info@foresteco.org</span>
               </li>
               <li className="flex items-start gap-2 text-sm text-muted-foreground">
                 <Phone size={16} className="mt-1 text-primary" />
@@ -84,7 +76,7 @@ const Footer = () => {
         </div>
 
         <div className="border-t border-border mt-8 pt-8 flex flex-col sm:flex-row justify-between items-center gap-2 text-sm text-muted-foreground">
-          <p>&copy; 2025 WildAgile Foundation. All rights reserved. | Partnership with Forest Department</p>
+          <p>&copy; 2025 Forest Department Maharashtra. All rights reserved.</p>
           <div className="flex items-center gap-4">
             <Link to="/admin" className="hover:text-primary transition-colors">
               Admin
