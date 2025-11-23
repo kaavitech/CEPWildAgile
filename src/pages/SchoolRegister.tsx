@@ -8,12 +8,14 @@ import { Card, CardContent, CardHeader } from '@/components/ui/card';
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select';
 import { Calendar } from '@/components/ui/calendar';
 import { Popover, PopoverContent, PopoverTrigger } from '@/components/ui/popover';
-import { CalendarIcon, Upload } from 'lucide-react';
+import { CalendarIcon, Upload, Clock, IndianRupee, Package, CheckCircle2 } from 'lucide-react';
 import { format } from 'date-fns';
 import Navbar from '@/components/Navbar';
 import Footer from '@/components/Footer';
 import { mockEcoCentres } from '@/lib/mockData';
 import { toast } from 'sonner';
+import { Checkbox } from '@/components/ui/checkbox';
+import { RadioGroup, RadioGroupItem } from '@/components/ui/radio-group';
 
 const SchoolRegister = () => {
   const navigate = useNavigate();
@@ -28,6 +30,12 @@ const SchoolRegister = () => {
   });
   const [selectedDates, setSelectedDates] = useState<Date[]>([]);
   const [fileName, setFileName] = useState('');
+  const [selectedActivities, setSelectedActivities] = useState<string[]>([]);
+  const [packageType, setPackageType] = useState<'individual' | 'wholeDay'>('individual');
+  const [selectedOvernightRoom, setSelectedOvernightRoom] = useState<string>('');
+  const [overnightNights, setOvernightNights] = useState<number>(0);
+
+  const selectedCentre = mockEcoCentres.find(c => c.id === formData.ecoCentre);
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
@@ -37,6 +45,12 @@ const SchoolRegister = () => {
         !formData.contactPhone || !formData.studentCount || !formData.ecoCentre || 
         selectedDates.length === 0 || !fileName) {
       toast.error('Please fill all required fields');
+      return;
+    }
+
+    // Validate activity/package selection
+    if (packageType === 'individual' && selectedActivities.length === 0) {
+      toast.error('Please select at least one activity or choose the whole day package');
       return;
     }
 
@@ -55,6 +69,42 @@ const SchoolRegister = () => {
       setFileName(file.name);
       toast.success('Parent consent form uploaded');
     }
+  };
+
+  const handleActivityToggle = (activityId: string) => {
+    setSelectedActivities(prev => 
+      prev.includes(activityId) 
+        ? prev.filter(id => id !== activityId)
+        : [...prev, activityId]
+    );
+  };
+
+  const calculateTotalCost = () => {
+    if (!selectedCentre || !formData.studentCount) return 0;
+    const studentCount = parseInt(formData.studentCount) || 0;
+    let total = 0;
+
+    if (packageType === 'wholeDay' && selectedCentre.wholeDayPackage) {
+      total = selectedCentre.wholeDayPackage.cost * studentCount;
+    } else {
+      selectedActivities.forEach(activityId => {
+        const activity = selectedCentre.activities?.find(a => a.id === activityId);
+        if (activity) {
+          total += activity.cost * studentCount;
+        }
+      });
+    }
+
+    // Add overnight stay cost if selected
+    if (selectedOvernightRoom && overnightNights > 0) {
+      const room = selectedCentre.overnightStay?.rooms?.find(r => r.id === selectedOvernightRoom);
+      if (room) {
+        const roomsNeeded = Math.ceil(studentCount / room.capacity);
+        total += room.rent * roomsNeeded * overnightNights;
+      }
+    }
+
+    return total;
   };
 
   return (
@@ -215,6 +265,185 @@ const SchoolRegister = () => {
                       />
                     </div>
                   </div>
+
+                  {/* Activity Selection */}
+                  {selectedCentre && (
+                    <div className="space-y-4">
+                      <h3 className="text-lg font-semibold">Activity & Package Selection</h3>
+                      
+                      {selectedCentre.wholeDayPackage && (
+                        <Card className="border-primary/20">
+                          <CardContent className="pt-6">
+                            <RadioGroup value={packageType} onValueChange={(value) => {
+                              setPackageType(value as 'individual' | 'wholeDay');
+                              if (value === 'wholeDay') {
+                                setSelectedActivities([]);
+                              }
+                            }}>
+                              <div className="flex items-start space-x-3 space-y-0 rounded-md border p-4">
+                                <RadioGroupItem value="wholeDay" id="wholeDay" className="mt-1" />
+                                <div className="flex-1">
+                                  <Label htmlFor="wholeDay" className="font-semibold cursor-pointer flex items-center gap-2">
+                                    <Package className="h-4 w-4 text-primary" />
+                                    {selectedCentre.wholeDayPackage.name}
+                                  </Label>
+                                  <p className="text-sm text-muted-foreground mt-1">
+                                    {selectedCentre.wholeDayPackage.description}
+                                  </p>
+                                  <div className="flex items-center gap-2 mt-2">
+                                    <span className="font-semibold text-primary">
+                                      <IndianRupee className="h-4 w-4 inline" />
+                                      {selectedCentre.wholeDayPackage.cost.toLocaleString('en-IN')} per student
+                                    </span>
+                                  </div>
+                                  <div className="mt-2">
+                                    <p className="text-xs font-medium mb-1">Includes:</p>
+                                    <ul className="text-xs text-muted-foreground space-y-1">
+                                      {selectedCentre.wholeDayPackage.includedActivities.map(activityId => {
+                                        const activity = selectedCentre.activities?.find(a => a.id === activityId);
+                                        return activity ? (
+                                          <li key={activityId} className="flex items-center gap-1">
+                                            <CheckCircle2 className="h-3 w-3 text-primary" />
+                                            {activity.name} ({activity.estimatedTime})
+                                          </li>
+                                        ) : null;
+                                      })}
+                                    </ul>
+                                  </div>
+                                </div>
+                              </div>
+                              <div className="flex items-start space-x-3 space-y-0 rounded-md border p-4 mt-2">
+                                <RadioGroupItem value="individual" id="individual" className="mt-1" />
+                                <div className="flex-1">
+                                  <Label htmlFor="individual" className="font-semibold cursor-pointer">
+                                    Select Individual Activities
+                                  </Label>
+                                  <p className="text-sm text-muted-foreground mt-1">
+                                    Choose specific activities you want to include
+                                  </p>
+                                </div>
+                              </div>
+                            </RadioGroup>
+                          </CardContent>
+                        </Card>
+                      )}
+
+                      {packageType === 'individual' && selectedCentre.activities && selectedCentre.activities.length > 0 && (
+                        <Card>
+                          <CardHeader>
+                            <h4 className="font-semibold">Select Activities</h4>
+                            <p className="text-sm text-muted-foreground">Choose the activities you want to include in your visit</p>
+                          </CardHeader>
+                          <CardContent>
+                            <div className="space-y-3">
+                              {selectedCentre.activities.map((activity) => (
+                                <div key={activity.id} className="flex items-start space-x-3 rounded-md border p-3">
+                                  <Checkbox
+                                    id={activity.id}
+                                    checked={selectedActivities.includes(activity.id)}
+                                    onCheckedChange={() => handleActivityToggle(activity.id)}
+                                    className="mt-1"
+                                  />
+                                  <div className="flex-1">
+                                    <Label htmlFor={activity.id} className="font-medium cursor-pointer">
+                                      {activity.name}
+                                    </Label>
+                                    {activity.description && (
+                                      <p className="text-sm text-muted-foreground mt-1">{activity.description}</p>
+                                    )}
+                                    <div className="flex items-center gap-4 mt-2 text-sm">
+                                      <div className="flex items-center gap-1 text-muted-foreground">
+                                        <Clock className="h-3 w-3" />
+                                        <span>{activity.estimatedTime}</span>
+                                      </div>
+                                      <div className="flex items-center gap-1 font-semibold text-primary">
+                                        <IndianRupee className="h-3 w-3" />
+                                        <span>{activity.cost.toLocaleString('en-IN')} per student</span>
+                                      </div>
+                                    </div>
+                                  </div>
+                                </div>
+                              ))}
+                            </div>
+                          </CardContent>
+                        </Card>
+                      )}
+
+                      {/* Overnight Stay Selection */}
+                      {selectedCentre.overnightStay?.available && (
+                        <Card>
+                          <CardHeader>
+                            <h4 className="font-semibold">Overnight Stay (Optional)</h4>
+                            <p className="text-sm text-muted-foreground">Select accommodation if you need overnight stay</p>
+                          </CardHeader>
+                          <CardContent className="space-y-4">
+                            {selectedCentre.overnightStay.rooms && selectedCentre.overnightStay.rooms.length > 0 && (
+                              <>
+                                <div>
+                                  <Label>Room Type</Label>
+                                  <Select value={selectedOvernightRoom} onValueChange={setSelectedOvernightRoom}>
+                                    <SelectTrigger>
+                                      <SelectValue placeholder="Select room type" />
+                                    </SelectTrigger>
+                                    <SelectContent>
+                                      {selectedCentre.overnightStay.rooms.map((room) => (
+                                        <SelectItem key={room.id} value={room.id}>
+                                          {room.type} - Capacity: {room.capacity} | 
+                                          <IndianRupee className="h-3 w-3 inline ml-1" />
+                                          {room.rent.toLocaleString('en-IN')}/night
+                                        </SelectItem>
+                                      ))}
+                                    </SelectContent>
+                                  </Select>
+                                </div>
+                                {selectedOvernightRoom && (
+                                  <>
+                                    <div>
+                                      <Label htmlFor="nights">Number of Nights</Label>
+                                      <Input
+                                        id="nights"
+                                        type="number"
+                                        min="1"
+                                        value={overnightNights}
+                                        onChange={(e) => setOvernightNights(parseInt(e.target.value) || 0)}
+                                        placeholder="Enter number of nights"
+                                      />
+                                    </div>
+                                    {overnightNights > 0 && formData.studentCount && (
+                                      <div className="p-3 bg-muted/50 rounded-lg">
+                                        <p className="text-sm text-muted-foreground">
+                                          Rooms needed: {Math.ceil(parseInt(formData.studentCount) / (selectedCentre.overnightStay.rooms?.find(r => r.id === selectedOvernightRoom)?.capacity || 1))}
+                                        </p>
+                                      </div>
+                                    )}
+                                  </>
+                                )}
+                              </>
+                            )}
+                          </CardContent>
+                        </Card>
+                      )}
+
+                      {/* Cost Summary */}
+                      {formData.studentCount && (
+                        <Card className="bg-primary/5 border-primary/20">
+                          <CardContent className="pt-6">
+                            <div className="flex items-center justify-between">
+                              <span className="font-semibold">Estimated Total Cost:</span>
+                              <span className="text-2xl font-bold text-primary">
+                                <IndianRupee className="h-5 w-5 inline" />
+                                {calculateTotalCost().toLocaleString('en-IN')}
+                              </span>
+                            </div>
+                            <p className="text-xs text-muted-foreground mt-2">
+                              For {formData.studentCount} student{parseInt(formData.studentCount) !== 1 ? 's' : ''}
+                              {overnightNights > 0 && ` × ${overnightNights} night${overnightNights !== 1 ? 's' : ''}`}
+                            </p>
+                          </CardContent>
+                        </Card>
+                      )}
+                    </div>
+                  )}
 
                   {/* Documents */}
                   <div className="space-y-4">

@@ -1,4 +1,5 @@
-import { useState, useMemo } from "react";
+import { useState, useMemo, useEffect } from "react";
+import { useSearchParams } from "react-router-dom";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
@@ -15,19 +16,40 @@ import { Slider } from "@/components/ui/slider";
 import { 
   CheckCircle, XCircle, Download, Plus, Edit, Trash2, Users, Building, GraduationCap, 
   FileText, Calendar, MapPin, Phone, Mail, User, Clock, FileCheck, AlertCircle,
-  Navigation, Car, Hospital, Fuel
+  Navigation, Car, Hospital, Fuel, IndianRupee, Search, Filter, TrendingUp,
+  Package, Activity, Ticket, BarChart3, Settings
 } from "lucide-react";
 import { useToast } from "@/hooks/use-toast";
-import { mockEvents, mockSchools, mockEcoCentres, mockCoordinators, mockLecturers, mockBusDrivers } from "@/lib/mockData";
+import { 
+  mockEvents, mockSchools, mockEcoCentres, mockCoordinators, mockLecturers, mockBusDrivers,
+  mockBookings, mockBookingActivities,
+  updateBookingStatus, updateBookingPaymentStatus, deleteBooking
+} from "@/lib/mockData";
 import type { Event, Coordinator, BusDriver, Teacher } from "@/lib/mockData";
+import EcoCentreBookingsAdmin from "@/pages/admin/EcoCentreBookingsAdmin";
 import MapPanel from "@/components/MapPanel";
 import { format, differenceInDays, parseISO } from "date-fns";
 
 export default function Admin() {
+  const [searchParams, setSearchParams] = useSearchParams();
+  const [activeTab, setActiveTab] = useState<string>(searchParams.get('tab') || 'events');
   const [events, setEvents] = useState(mockEvents);
   const [selectedEvent, setSelectedEvent] = useState<Event | null>(null);
   const [isEventDetailOpen, setIsEventDetailOpen] = useState(false);
   const { toast } = useToast();
+
+  // Sync URL parameter with tab state
+  useEffect(() => {
+    const tabParam = searchParams.get('tab');
+    if (tabParam) {
+      setActiveTab(tabParam);
+    }
+  }, [searchParams]);
+
+  const handleTabChange = (value: string) => {
+    setActiveTab(value);
+    setSearchParams({ tab: value });
+  };
 
   // Calculate days remaining for each event
   const eventsWithDaysRemaining = useMemo(() => {
@@ -148,9 +170,10 @@ export default function Admin() {
         </div>
 
         {/* Tabs for different sections */}
-        <Tabs defaultValue="events" className="space-y-6">
+        <Tabs value={activeTab} onValueChange={handleTabChange} className="space-y-6">
           <TabsList className="bg-muted">
             <TabsTrigger value="events"><Calendar className="w-4 h-4 mr-2" />Events</TabsTrigger>
+            <TabsTrigger value="bookings"><Ticket className="w-4 h-4 mr-2" />Eco Centre Bookings</TabsTrigger>
             <TabsTrigger value="schools"><Users className="w-4 h-4 mr-2" />Schools</TabsTrigger>
             <TabsTrigger value="coordinators"><User className="w-4 h-4 mr-2" />Coordinators</TabsTrigger>
             <TabsTrigger value="drivers"><Car className="w-4 h-4 mr-2" />Drivers</TabsTrigger>
@@ -265,6 +288,18 @@ export default function Admin() {
             </Card>
           </TabsContent>
 
+          {/* Eco Centre Bookings */}
+          <TabsContent value="bookings">
+            <EcoCentreBookingsAdmin 
+              bookings={mockBookings}
+              ecoCentres={mockEcoCentres}
+              activities={mockBookingActivities}
+              onBookingUpdate={updateBookingStatus}
+              onPaymentUpdate={updateBookingPaymentStatus}
+              onBookingDelete={deleteBooking}
+            />
+          </TabsContent>
+
           {/* Schools Management */}
           <TabsContent value="schools">
             <Card>
@@ -324,7 +359,7 @@ export default function Admin() {
                   </div>
                   <Dialog>
                     <DialogTrigger asChild>
-                      <Button variant="outline">
+                      <Button className="bg-forest hover:bg-forest/90">
                         <Plus className="w-4 h-4 mr-2" />
                         Add Coordinator
                       </Button>
@@ -414,7 +449,7 @@ export default function Admin() {
                   </div>
                   <Dialog>
                     <DialogTrigger asChild>
-                      <Button variant="outline">
+                      <Button className="bg-forest hover:bg-forest/90">
                         <Plus className="w-4 h-4 mr-2" />
                         Add Driver
                       </Button>

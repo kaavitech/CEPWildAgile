@@ -15,6 +15,10 @@ import GuestLecturers from "./pages/GuestLecturers";
 import ExecutionPlan from "./pages/ExecutionPlan";
 import NotFound from "./pages/NotFound";
 import Admin from "./pages/Admin";
+import Bookings from "./pages/Bookings";
+import ActivityDetails from "./pages/ActivityDetails";
+import BookingForm from "./pages/BookingForm";
+import BookingConfirmation from "./pages/BookingConfirmation";
 
 const queryClient = new QueryClient();
 
@@ -36,6 +40,10 @@ const App = () => (
           <Route path="/lecturers" element={<GuestLecturers />} />
           <Route path="/execution-plan" element={<ExecutionPlan />} />
           <Route path="/admin" element={<Admin />} />
+          <Route path="/bookings" element={<Bookings />} />
+          <Route path="/bookings/confirmation/:bookingId" element={<BookingConfirmation />} />
+          <Route path="/bookings/:ecoCentreId/:activityId" element={<BookingForm />} />
+          <Route path="/bookings/:id" element={<ActivityDetails />} />
           {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
           <Route path="*" element={<NotFound />} />
         </Routes>

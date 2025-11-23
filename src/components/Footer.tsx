@@ -85,9 +85,14 @@ const Footer = () => {
 
         <div className="border-t border-border mt-8 pt-8 flex flex-col sm:flex-row justify-between items-center gap-2 text-sm text-muted-foreground">
           <p>&copy; 2025 WildAgile Foundation. All rights reserved. | Partnership with Forest Department</p>
-          <Link to="/admin" className="hover:text-primary transition-colors">
-            Admin
-          </Link>
+          <div className="flex items-center gap-4">
+            <Link to="/admin" className="hover:text-primary transition-colors">
+              Admin
+            </Link>
+            <Link to="/admin?tab=bookings" className="hover:text-primary transition-colors">
+              Eco Centre Bookings
+            </Link>
+          </div>
         </div>
       </div>
     </footer>

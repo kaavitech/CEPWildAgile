@@ -28,6 +28,9 @@ const Navbar = () => {
             <Link to="/eco-centres" className="text-foreground hover:text-primary transition-colors">
               Eco Centres
             </Link>
+            <Link to="/bookings" className="text-foreground hover:text-primary transition-colors">
+              Bookings
+            </Link>
             <Link to="/execution-plan" className="text-foreground hover:text-primary transition-colors">
               Execution Plan
             </Link>
@@ -48,6 +51,11 @@ const Navbar = () => {
             <Link to="/admin">
               <Button variant="outline">
                 Admin
+              </Button>
+            </Link>
+            <Link to="/admin?tab=bookings">
+              <Button variant="outline" size="sm">
+                Eco Centre Bookings
               </Button>
             </Link>
           </div>
@@ -85,6 +93,13 @@ const Navbar = () => {
               onClick={() => setIsOpen(false)}
             >
               Eco Centres
+            </Link>
+            <Link
+              to="/bookings"
+              className="block py-2 text-foreground hover:text-primary transition-colors"
+              onClick={() => setIsOpen(false)}
+            >
+              Bookings
             </Link>
             <Link
               to="/execution-plan"
