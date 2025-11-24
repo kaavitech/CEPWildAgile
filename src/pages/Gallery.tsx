@@ -14,7 +14,7 @@ const Gallery = () => {
       image: heroImg,
       title: 'Nature Trail Experience',
       category: 'Activities',
-      description: 'Students exploring forest trails with experienced guides'
+      description: 'World exploring forest trails with experienced guides'
     },
     {
       id: 2,
@@ -50,7 +50,7 @@ const Gallery = () => {
             <div className="max-w-3xl mx-auto text-center animate-fade-in">
               <h1 className="text-4xl md:text-5xl font-bold mb-6">Gallery</h1>
               <p className="text-xl opacity-95">
-                Moments captured from our eco-centre visits and student activities
+                Moments captured from our eco-centre visits and activities
               </p>
             </div>
           </div>
@@ -62,7 +62,7 @@ const Gallery = () => {
             <div className="max-w-4xl mx-auto text-center mb-12">
               <h2 className="text-3xl font-bold mb-6">Photo Gallery</h2>
               <p className="text-lg text-muted-foreground leading-relaxed">
-                Explore images from our educational visits and see the impact of our program on students.
+                Explore images from our educational visits and see the impact of our program on world.
               </p>
             </div>
             <div className="grid md:grid-cols-2 gap-6 max-w-4xl mx-auto">
@@ -84,11 +84,11 @@ const Gallery = () => {
             </div>
             <div className="mt-12 text-center max-w-4xl mx-auto">
               <p className="text-lg text-muted-foreground mb-6 leading-relaxed">
-                Want to see your school's photos featured here?
+                Want to see your world's photos featured here?
               </p>
               <a href="/school/register">
                 <button className="bg-gradient-forest text-primary-foreground px-6 py-3 rounded-md hover:opacity-90 transition-opacity">
-                  Register Your School
+                  Send Enquiry
                 </button>
               </a>
             </div>

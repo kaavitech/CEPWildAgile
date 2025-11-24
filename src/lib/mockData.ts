@@ -1,4 +1,4 @@
-// Mock data for the Child Education Program
+// Mock data for the CEP
 
 export interface Activity {
   id: string;

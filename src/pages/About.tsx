@@ -10,11 +10,11 @@ import {
 } from "@/components/ui/accordion";
 
 const programObjectives = [
-  "Connect children with nature through hands-on forest experiences",
-  "Build environmental consciousness from a young age",
+  "Connect world with nature through hands-on forest experiences",
+  "Build environmental consciousness",
   "Promote biodiversity awareness and conservation",
-  "Develop sustainable practices in the next generation",
-  "Create memorable learning experiences outside classrooms",
+  "Develop sustainable practices",
+  "Create memorable learning experiences",
 ];
 
 const workflowPhases = [
@@ -24,7 +24,7 @@ const workflowPhases = [
     summary: "Key Activities:",
     items: [
       "Eco centre reconnaissance and safety assessment",
-      "School and guest lecturer mapping",
+      "World and Affiliated Experts mapping",
       "Permission acquisition from Forest Department",
       "SOP definition for pre-event, during event, and return",
       "Logistics planning (buses, materials, first aid)",
@@ -36,7 +36,7 @@ const workflowPhases = [
     title: "Phase 2: Sales & Outreach",
     summary: "Engagement Strategy:",
     items: [
-      "Direct school engagement and presentations",
+      "Direct world engagement and presentations",
       "DEO/BEO partnership development",
       "CSR collaboration for funding and support",
       "Promotional material distribution",
@@ -52,7 +52,7 @@ const workflowPhases = [
       "At eco centre: welcome briefing and trail walk with guides",
       "Activities: guest lecture and interactive sessions",
       "Safety: first aid readiness, hygiene protocols, contingency plans",
-      "Return: attendance check and safe drop-off at school",
+      "Return: attendance check and safe drop-off at world",
     ],
   },
   {
@@ -60,7 +60,7 @@ const workflowPhases = [
     title: "Phase 4: Post-Event & Documentation",
     summary: "Follow-up Actions:",
     items: [
-      "Feedback collection from students and teachers",
+      "Feedback collection from world",
       "Photo and video documentation",
       "Report preparation for stakeholders",
       "Social media content creation (with permissions)",
@@ -81,7 +81,7 @@ const About = () => {
             <div className="max-w-3xl mx-auto text-center animate-fade-in">
               <h1 className="text-4xl md:text-5xl font-bold mb-6">About Our Program</h1>
               <p className="text-xl opacity-95">
-                Empowering the next generation through experiential environmental education
+                Empowering world through experiential environmental education
               </p>
             </div>
           </div>
@@ -91,10 +91,10 @@ const About = () => {
         <section className="py-16 bg-background">
           <div className="container mx-auto px-4">
             <div className="max-w-4xl mx-auto text-center mb-12">
-              <h2 className="text-3xl font-bold mb-6">Why the Child Education Program Exists</h2>
+              <h2 className="text-3xl font-bold mb-6">Why the CEP Exists</h2>
               <p className="text-lg text-muted-foreground leading-relaxed">
-                The Child Education Program is a collaborative initiative between the Maharashtra Forest Department
-                and WildAgile Foundation, connecting children with nature through immersive, hands-on experiences
+                The CEP is an initiative by the Maharashtra Forest Department
+                connecting world with nature through immersive, hands-on experiences
                 in protected forest areas and wildlife sanctuaries. Early exposure to nature fosters lifelong environmental
                 stewardship, so each visit blends guided trails, wildlife observation, and sessions with conservation experts.
               </p>
@@ -149,7 +149,7 @@ const About = () => {
                 </CardContent>
               </Card>
 
-              <Card className="shadow-soft">
+              {/*<Card className="shadow-soft">
                 <CardContent className="pt-6">
                   <div className="w-14 h-14 rounded-full bg-secondary/10 flex items-center justify-center mb-4">
                     <Heart className="h-7 w-7 text-secondary" />
@@ -173,17 +173,17 @@ const About = () => {
                     integrating curriculum with real-world conservation efforts.
                   </p>
                 </CardContent>
-              </Card>
+              </Card>*/}
 
               <Card className="shadow-soft">
                 <CardContent className="pt-6">
                   <div className="w-14 h-14 rounded-full bg-earth/10 flex items-center justify-center mb-4">
                     <Target className="h-7 w-7 text-earth" />
                   </div>
-                  <h3 className="text-xl font-semibold mb-3">Guest Lecturers</h3>
+                  <h3 className="text-xl font-semibold mb-3">Affiliated Experts</h3>
                   <p className="text-muted-foreground">
                     Wildlife biologists, ecologists, and conservation experts share their knowledge and 
-                    inspire students through engaging presentations and field demonstrations.
+                    inspire world through engaging presentations and field demonstrations.
                   </p>
                 </CardContent>
               </Card>

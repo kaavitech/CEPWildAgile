@@ -1,8 +1,8 @@
-# Child Education Program (CEP) - Project Proposal Document
+# CEP (CEP) - Project Proposal Document
 
 ## Executive Summary
 
-The Child Education Program (CEP) is a comprehensive web-based platform designed to facilitate eco-education programs for schools in collaboration with the Maharashtra Forest Department and WildAgile Foundation. The platform manages the entire lifecycle of eco-centre visits, from school registration and event planning to booking management and administrative oversight.
+The CEP (CEP) is a comprehensive web-based platform designed to facilitate eco-education programs for schools in collaboration with the Maharashtra Forest Department and WildAgile Foundation. The platform manages the entire lifecycle of eco-centre visits, from school registration and event planning to booking management and administrative oversight.
 
 ---
 
@@ -1465,7 +1465,7 @@ The platform is divided into **3 stages**, each containing specific screens, fea
 
 ## Conclusion
 
-The Child Education Program platform is a comprehensive solution for managing eco-education programs. The current implementation includes all basic features and several add-on features. Future enhancements can be added incrementally based on requirements and budget.
+The CEP platform is a comprehensive solution for managing eco-education programs. The current implementation includes all basic features and several add-on features. Future enhancements can be added incrementally based on requirements and budget.
 
 The platform is designed to be scalable, maintainable, and user-friendly, with a focus on providing an excellent experience for schools, administrators, and end users.
 
@@ -1474,5 +1474,5 @@ The platform is designed to be scalable, maintainable, and user-friendly, with a
 **Document Version**: 1.0  
 **Last Updated**: January 2025  
 **Prepared By**: Development Team  
-**Project**: Child Education Program (CEP) - CEPLoveable
+**Project**: CEP (CEP) - CEPLoveable
 

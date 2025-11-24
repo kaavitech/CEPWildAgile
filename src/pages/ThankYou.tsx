@@ -22,7 +22,7 @@ const ThankYou = () => {
             
             <h1 className="text-4xl font-bold mb-4">Registration Successful!</h1>
             <p className="text-lg text-muted-foreground mb-8">
-              Thank you for registering your school with the Child Education Program
+              Thank you for registering your school with the CEP
             </p>
 
             <Card className="shadow-medium mb-8">

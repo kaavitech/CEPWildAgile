@@ -93,7 +93,7 @@ const Footer = () => {
 
         <div className="border-t border-primary-foreground/20 mt-8 pt-8 text-center text-sm opacity-80">
           <p>
-            © 2025 Child Education Program. A collaboration between Forest Department & WildAgile Foundation.
+            © 2025 CEP. A collaboration between Forest Department & WildAgile Foundation.
           </p>
         </div>
       </div>

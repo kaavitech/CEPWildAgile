@@ -22,15 +22,15 @@ const Home = () => {
         <div className="container mx-auto px-4 relative z-10">
           <div className="max-w-4xl mx-auto text-center animate-fade-in">
             <h1 className="text-4xl md:text-6xl font-bold mb-6 leading-tight">
-              Connecting Children with Nature
+              Connecting World with Nature
             </h1>
             <p className="text-xl md:text-2xl mb-8 opacity-95">
-              An initiative by Forest Department Maharashtra & WildAgile Foundation to inspire the next generation of conservationists
+              An initiative by Forest Department Maharashtra to inspire the next generation of conservationists
             </p>
             <div className="flex flex-col sm:flex-row gap-4 justify-center">
               <Link to="/school/register">
                 <Button size="lg" className="bg-card text-card-foreground hover:bg-card/90 shadow-lg">
-                  Register Your School
+                  Send Enquiry
                 </Button>
               </Link>
               <Link to="/eco-centres">
@@ -51,7 +51,7 @@ const Home = () => {
               <CardContent className="pt-6">
                 <Users className="h-12 w-12 text-primary mx-auto mb-3" />
                 <div className="text-3xl font-bold text-foreground mb-2">2,500+</div>
-                <div className="text-sm text-muted-foreground">Students Impacted</div>
+                <div className="text-sm text-muted-foreground">People Impacted</div>
               </CardContent>
             </Card>
             
@@ -67,7 +67,7 @@ const Home = () => {
               <CardContent className="pt-6">
                 <TreePine className="h-12 w-12 text-accent mx-auto mb-3" />
                 <div className="text-3xl font-bold text-foreground mb-2">45</div>
-                <div className="text-sm text-muted-foreground">School Visits</div>
+                <div className="text-sm text-muted-foreground">Events Scheduled</div>
               </CardContent>
             </Card>
             
@@ -88,8 +88,8 @@ const Home = () => {
           <div className="max-w-3xl mx-auto text-center mb-12">
             <h2 className="text-3xl md:text-4xl font-bold mb-4">About Our Program</h2>
             <p className="text-lg text-muted-foreground">
-              The Child Education Program bridges classroom learning with hands-on nature experiences, 
-              fostering environmental stewardship among young minds.
+              The CEP bridges classroom learning with hands-on nature experiences, 
+              fostering environmental stewardship among people.
             </p>
           </div>
 
@@ -101,7 +101,7 @@ const Home = () => {
                 </div>
                 <h3 className="text-xl font-semibold mb-3">Immersive Learning</h3>
                 <p className="text-muted-foreground">
-                  Students explore eco centres with guided nature trails, wildlife spotting, and interactive sessions with conservation experts.
+                  World can explore eco centres with guided nature trails, wildlife spotting, and interactive sessions with conservation experts.
                 </p>
               </CardContent>
             </Card>
@@ -113,7 +113,7 @@ const Home = () => {
                 </div>
                 <h3 className="text-xl font-semibold mb-3">Expert Guidance</h3>
                 <p className="text-muted-foreground">
-                  Forest officers and guest lecturers share their knowledge, inspiring students to become nature advocates.
+                  Forest officers and Affiliated Experts share their knowledge, inspiring students to become nature advocates.
                 </p>
               </CardContent>
             </Card>
@@ -137,14 +137,14 @@ const Home = () => {
       <section className="py-20 bg-gradient-earth text-primary-foreground">
         <div className="container mx-auto px-4 text-center">
           <h2 className="text-3xl md:text-4xl font-bold mb-6">
-            Ready to Inspire Your Students?
+            Ready to get Inspired?
           </h2>
           <p className="text-xl mb-8 max-w-2xl mx-auto opacity-95">
-            Join hundreds of schools bringing environmental education to life through our program.
+            Join hundreds of people bringing environmental education to life through our program.
           </p>
           <Link to="/school/register">
             <Button size="lg" className="bg-card text-card-foreground hover:bg-card/90 shadow-lg">
-              Register Your School Today
+              Send Enquiry Today
             </Button>
           </Link>
         </div>

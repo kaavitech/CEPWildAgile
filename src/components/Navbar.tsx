@@ -53,7 +53,7 @@ const Navbar = () => {
             )}
             {checkRoute('/lecturers') && (
               <Link to="/lecturers" className="text-foreground hover:text-primary transition-colors">
-                Guest Lecturers
+                Affiliated Experts
               </Link>
             )}
             {checkRoute('/gallery') && (
@@ -153,7 +153,7 @@ const Navbar = () => {
                 className="block py-2 text-foreground hover:text-primary transition-colors"
                 onClick={() => setIsOpen(false)}
               >
-                Guest Lecturers
+                Affiliated Experts
               </Link>
             )}
             {checkRoute('/gallery') && (

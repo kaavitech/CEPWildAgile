@@ -14,7 +14,7 @@ const GuestLecturers = () => {
         <section className="py-20 bg-gradient-forest text-primary-foreground">
           <div className="container mx-auto px-4">
             <div className="max-w-3xl mx-auto text-center animate-fade-in">
-              <h1 className="text-4xl md:text-5xl font-bold mb-6">Guest Lecturers</h1>
+              <h1 className="text-4xl md:text-5xl font-bold mb-6">Affiliated Experts</h1>
               <p className="text-xl opacity-95">
                 Verified educators, naturalists, and conservationists who accompany every eco centre visit to make
                 learning memorable and aligned with the Forest Department curriculum.

@@ -126,14 +126,14 @@ export default function Admin() {
       <main className="container mx-auto px-4 py-12">
         <div className="mb-8">
           <h1 className="text-4xl font-bold text-forest mb-2">Admin Dashboard</h1>
-          <p className="text-muted-foreground">Manage the Child Education Program</p>
+          <p className="text-muted-foreground">Manage the CEP</p>
         </div>
 
         {/* Stats Cards */}
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 mb-8">
           <Card>
             <CardHeader className="pb-3">
-              <CardTitle className="text-sm font-medium text-muted-foreground">Total Events</CardTitle>
+              <CardTitle className="text-sm font-medium text-muted-foreground">Total Enquiries</CardTitle>
             </CardHeader>
             <CardContent>
               <div className="text-3xl font-bold text-forest">{events.length}</div>
@@ -143,31 +143,31 @@ export default function Admin() {
           
           <Card>
             <CardHeader className="pb-3">
-              <CardTitle className="text-sm font-medium text-muted-foreground">Approved Events</CardTitle>
+              <CardTitle className="text-sm font-medium text-muted-foreground">Approved Enquiries</CardTitle>
             </CardHeader>
             <CardContent>
               <div className="text-3xl font-bold text-forest">{approvedEvents.length}</div>
-              <p className="text-xs text-muted-foreground mt-1">Active events</p>
+              <p className="text-xs text-muted-foreground mt-1">Active enquiries</p>
             </CardContent>
           </Card>
           
           <Card>
             <CardHeader className="pb-3">
-              <CardTitle className="text-sm font-medium text-muted-foreground">Pending Approval</CardTitle>
+              <CardTitle className="text-sm font-medium text-muted-foreground">Pending Enquiries</CardTitle>
             </CardHeader>
             <CardContent>
               <div className="text-3xl font-bold text-accent">{pendingEvents.length}</div>
-              <p className="text-xs text-muted-foreground mt-1">Requires action</p>
+              <p className="text-xs text-muted-foreground mt-1">Requires response</p>
             </CardContent>
           </Card>
 
           <Card>
             <CardHeader className="pb-3">
-              <CardTitle className="text-sm font-medium text-muted-foreground">Completed</CardTitle>
+              <CardTitle className="text-sm font-medium text-muted-foreground">Completed Enquiries</CardTitle>
             </CardHeader>
             <CardContent>
               <div className="text-3xl font-bold text-forest">{completedEvents.length}</div>
-              <p className="text-xs text-muted-foreground mt-1">This year</p>
+              <p className="text-xs text-muted-foreground mt-1">All time</p>
             </CardContent>
           </Card>
         </div>
@@ -177,7 +177,7 @@ export default function Admin() {
           <TabsList className="bg-muted">
             {/* Stage 1 tabs */}
             {checkRoute('/admin?tab=events') && (
-              <TabsTrigger value="events"><Calendar className="w-4 h-4 mr-2" />Events</TabsTrigger>
+              <TabsTrigger value="events"><Calendar className="w-4 h-4 mr-2" />Enquiries</TabsTrigger>
             )}
             {checkRoute('/admin?tab=coordinators') && (
               <TabsTrigger value="coordinators"><User className="w-4 h-4 mr-2" />Coordinators</TabsTrigger>
@@ -203,8 +203,8 @@ export default function Admin() {
               <CardHeader>
                 <div className="flex justify-between items-center">
                   <div>
-                    <CardTitle>Event Management</CardTitle>
-                    <CardDescription>Manage all school events and assignments</CardDescription>
+                    <CardTitle>Enquiry Management</CardTitle>
+                    <CardDescription>Manage all enquiries</CardDescription>
                   </div>
                   <Button onClick={() => toast({ title: "Export Started", description: "Downloading events data..." })} variant="outline">
                     <Download className="w-4 h-4 mr-2" />
@@ -216,13 +216,10 @@ export default function Admin() {
                 <Table>
                   <TableHeader>
                     <TableRow>
-                      <TableHead>Event Code</TableHead>
-                      <TableHead>School</TableHead>
+                      <TableHead>Enquiry Code</TableHead>
+                      <TableHead>Enquiry By</TableHead>
                       <TableHead>Eco Centre</TableHead>
                       <TableHead>Date</TableHead>
-                      <TableHead>Students</TableHead>
-                      <TableHead>Consent Forms</TableHead>
-                      <TableHead>Days Remaining</TableHead>
                       <TableHead>Status</TableHead>
                       <TableHead>Actions</TableHead>
                     </TableRow>
@@ -601,9 +598,9 @@ export default function Admin() {
       <Dialog open={isEventDetailOpen} onOpenChange={setIsEventDetailOpen}>
         <DialogContent className="max-w-6xl max-h-[90vh] overflow-y-auto">
           <DialogHeader>
-            <DialogTitle className="text-2xl">{selectedEvent?.code} - Event Details</DialogTitle>
+            <DialogTitle className="text-2xl">{selectedEvent?.code} - Enquiry Details</DialogTitle>
             <DialogDescription>
-              Complete event information and management
+              Complete enquiry information and management
             </DialogDescription>
           </DialogHeader>
           
@@ -625,7 +622,7 @@ export default function Admin() {
                   <CardContent>
                     <div className="space-y-4">
                       <div className="flex justify-between items-center">
-                        <span className="text-sm text-muted-foreground">Event Date: {format(parseISO(selectedEvent.date), 'MMMM dd, yyyy')}</span>
+                        <span className="text-sm text-muted-foreground">Enquiry Date: {format(parseISO(selectedEvent.date), 'MMMM dd, yyyy')}</span>
                         <span className={`text-lg font-bold ${daysRemaining < 0 ? 'text-destructive' : daysRemaining <= 7 ? 'text-yellow-600' : 'text-forest'}`}>
                           {daysRemaining < 0 ? `${Math.abs(daysRemaining)} days ago` : `${daysRemaining} days remaining`}
                         </span>
@@ -650,11 +647,11 @@ export default function Admin() {
               <div className="grid md:grid-cols-2 gap-4">
                 <Card>
                   <CardHeader>
-                    <CardTitle>Event Information</CardTitle>
+                    <CardTitle>Enquiry Information</CardTitle>
                   </CardHeader>
                   <CardContent className="space-y-3">
                     <div>
-                      <Label className="text-sm text-muted-foreground">School</Label>
+                      <Label className="text-sm text-muted-foreground">Enquiry By</Label>
                       <p className="font-medium">{getEventSchool(selectedEvent.schoolId)?.name}</p>
                     </div>
                     <div>
@@ -676,11 +673,11 @@ export default function Admin() {
 
                 <Card>
                   <CardHeader>
-                    <CardTitle>Student Information</CardTitle>
+                    <CardTitle>Guest Information</CardTitle>
                   </CardHeader>
                   <CardContent className="space-y-3">
                     <div>
-                      <Label className="text-sm text-muted-foreground">Total Students</Label>
+                      <Label className="text-sm text-muted-foreground">Total Guests</Label>
                       <p className="font-medium text-2xl">{selectedEvent.students_count}</p>
                     </div>
                     <div>
@@ -785,7 +782,7 @@ export default function Admin() {
               {selectedEvent.teachers && selectedEvent.teachers.length > 0 && (
                 <Card>
                   <CardHeader>
-                    <CardTitle>Teacher Details</CardTitle>
+                    <CardTitle>Guest Details</CardTitle>
                   </CardHeader>
                   <CardContent>
                     <div className="space-y-3">
@@ -794,7 +791,7 @@ export default function Admin() {
                           <User className="h-5 w-5 text-primary mt-0.5" />
                           <div className="flex-1">
                             <p className="font-medium">{teacher.name}</p>
-                            <p className="text-sm text-muted-foreground">{teacher.role}</p>
+                            {/*<p className="text-sm text-muted-foreground">{teacher.role}</p>*/}
                             <div className="flex gap-4 mt-1">
                               <a href={`tel:${teacher.phone}`} className="text-sm text-primary hover:underline flex items-center gap-1">
                                 <Phone className="h-3 w-3" />
@@ -817,7 +814,7 @@ export default function Admin() {
               {selectedEvent.emergencyContacts && selectedEvent.emergencyContacts.length > 0 && (
                 <Card>
                   <CardHeader>
-                    <CardTitle>Emergency Contacts</CardTitle>
+                    <CardTitle>Guest's Emergency Contacts</CardTitle>
                   </CardHeader>
                   <CardContent>
                     <div className="space-y-2">
@@ -826,7 +823,7 @@ export default function Admin() {
                           <AlertCircle className="h-5 w-5 text-destructive" />
                           <div className="flex-1">
                             <p className="font-medium">{contact.name}</p>
-                            <p className="text-sm text-muted-foreground">Student: {contact.studentName}</p>
+                            {/*<p className="text-sm text-muted-foreground">Guest: {contact.guestName}</p>*/}
                             <a href={`tel:${contact.phone}`} className="text-sm text-primary hover:underline flex items-center gap-1 mt-1">
                               <Phone className="h-3 w-3" />
                               {contact.phone}
@@ -847,7 +844,7 @@ export default function Admin() {
                       <Navigation className="h-5 w-5" />
                       Route Map
                     </CardTitle>
-                    <CardDescription>Route from school to eco centre with hospitals and petrol stations</CardDescription>
+                    <CardDescription>Route from guest's location to eco centre with hospitals and petrol stations</CardDescription>
                   </CardHeader>
                   <CardContent>
                     <div className="h-96 rounded-lg overflow-hidden border">

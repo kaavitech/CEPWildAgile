@@ -68,7 +68,7 @@ const EcoCentreCard = ({ centre }: EcoCentreCardProps) => {
         <div className="flex items-center gap-2 text-sm">
           <Users className="h-4 w-4 text-primary" />
           <span className="font-medium">Capacity:</span>
-          <span className="text-muted-foreground">{centre.capacity} students</span>
+          <span className="text-muted-foreground">{centre.capacity} world</span>
         </div>
       </CardContent>
 

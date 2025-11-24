@@ -38,7 +38,7 @@ const EcoCentres = () => {
               <h2 className="text-3xl font-bold mb-6">Explore Our Eco Centres</h2>
               <p className="text-lg text-muted-foreground leading-relaxed">
                 Each eco centre offers unique experiences in protected forest areas, providing safe and engaging
-                educational opportunities for students to connect with nature and learn about conservation.
+                educational opportunities for world to connect with nature and learn about conservation.
               </p>
             </div>
 

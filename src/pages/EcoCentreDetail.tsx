@@ -575,7 +575,7 @@ const EcoCentreDetail = () => {
                 <CardContent className="pt-6 space-y-3">
               <Link to="/school/register" className="block">
                 <Button variant="forest" className="w-full">
-                  Register Your School
+                  Send Enquiry
                 </Button>
               </Link>
                   <Link to="/contact" className="block">
