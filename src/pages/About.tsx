@@ -121,7 +121,7 @@ const About = () => {
                     <h3 className="text-2xl font-semibold">Mission</h3>
                   </div>
                   <p className="text-muted-foreground leading-relaxed">
-                    To facilitate structured, safe, and engaging forest visits for school children, providing hands-on learning
+                    To facilitate structured, safe, and engaging forest visits for the world, providing hands-on learning
                     about ecology, wildlife, and sustainable practices through expert-guided programs.
                   </p>
                 </CardContent>
