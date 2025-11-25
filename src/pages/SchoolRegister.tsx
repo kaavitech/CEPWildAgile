@@ -57,7 +57,7 @@ const SchoolRegister = () => {
     // Mock submission
     const eventCode = `CED-2025-${Math.floor(Math.random() * 1000).toString().padStart(3, '0')}`;
     
-    toast.success('Registration submitted successfully!');
+    toast.success('Enquiry submitted successfully!');
     
     // Navigate to thank you page with event code
     navigate('/school/thank-you', { state: { eventCode } });

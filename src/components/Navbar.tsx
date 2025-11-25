@@ -177,7 +177,7 @@ const Navbar = () => {
             {checkRoute('/school/register') && (
               <Link to="/school/register" onClick={() => setIsOpen(false)}>
                 <Button variant="forest" className="w-full">
-                  Register School
+                  Send Enquiry
                 </Button>
               </Link>
             )}
