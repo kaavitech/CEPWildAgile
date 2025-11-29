@@ -1,14 +1,24 @@
-import { Link } from 'react-router-dom';
+import { Link, useSearchParams } from 'react-router-dom';
 import { Button } from '@/components/ui/button';
 import { Card, CardContent } from '@/components/ui/card';
 import { TreePine, Users, MapPin, Award } from 'lucide-react';
 import Navbar from '@/components/Navbar';
 import Footer from '@/components/Footer';
+import RibbonCutting from '@/components/RibbonCutting';
 import heroImage from '@/assets/hero-children-forest.jpg';
 
 const Home = () => {
+  const [searchParams] = useSearchParams();
+  const isInaugurationMode = searchParams.get('inaugurate') === 'true';
+
+  const handleRibbonCut = () => {
+    // Celebration callback - you can add additional logic here
+    console.log('Ribbon cut! Site inaugurated!');
+  };
+
   return (
     <div className="min-h-screen flex flex-col">
+      {isInaugurationMode && <RibbonCutting onCut={handleRibbonCut} />}
       <Navbar />
       
       {/* Hero Section */}
